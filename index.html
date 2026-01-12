@@ -19,6 +19,7 @@
       <li><a href="#stats">Impact</a></li>
       <li><a href="#skills">Stack</a></li>
       <li><a href="#projects">Systems</a></li>
+      <li><a href="#multi-dashboard">Dashboards</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -94,6 +95,45 @@
         <h3>Inventory Intelligence Platform</h3>
         <p>Demand & stock optimization system</p>
       </button>
+    </div>
+  </section>
+
+  <!-- MULTI DASHBOARD -->
+  <section id="multi-dashboard" class="section reveal">
+    <h2>Explore My Dashboards</h2>
+    <div class="dashboard-tabs">
+      <button class="tab-btn active" data-dashboard="finance">Finance</button>
+      <button class="tab-btn" data-dashboard="inventory">Inventory</button>
+      <button class="tab-btn" data-dashboard="growth">Growth</button>
+    </div>
+
+    <div class="dashboard-frame">
+      <!-- Finance -->
+      <iframe id="finance" class="dashboard-iframe active"
+        src="https://app.powerbi.com/view?r=YOUR_FINANCE_EMBED_CODE"
+        frameborder="0" allowfullscreen="true"></iframe>
+      <p id="finance-caption" class="dashboard-caption active" data-text="💰 This dashboard highlights revenue streams and expense control. Notice the spike after automation in 2025.">
+        <span class="typed-text"></span><span class="cursor">|</span>
+        <button class="skip-btn">⏩ Skip</button>
+      </p>
+
+      <!-- Inventory -->
+      <iframe id="inventory" class="dashboard-iframe"
+        src="https://app.powerbi.com/view?r=YOUR_INVENTORY_EMBED_CODE"
+        frameborder="0" allowfullscreen="true"></iframe>
+      <p id="inventory-caption" class="dashboard-caption" data-text="📦 This dashboard tracks demand vs. stock levels. See how predictive analytics reduced shortages by 40%.">
+        <span class="typed-text"></span><span class="cursor">|</span>
+        <button class="skip-btn">⏩ Skip</button>
+      </p>
+
+      <!-- Growth -->
+      <iframe id="growth" class="dashboard-iframe"
+        src="https://app.powerbi.com/view?r=YOUR_GROWTH_EMBED_CODE"
+        frameborder="0" allowfullscreen="true"></iframe>
+      <p id="growth-caption" class="dashboard-caption" data-text="📈 This dashboard visualizes system adoption across industries. Growth accelerates after 2024 with cross‑domain expansion.">
+        <span class="typed-text"></span><span class="cursor">|</span>
+        <button class="skip-btn">⏩ Skip</button>
+      </p>
     </div>
   </section>
 
