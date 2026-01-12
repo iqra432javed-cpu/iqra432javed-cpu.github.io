@@ -13,50 +13,41 @@ const body = document.body;
 function setTheme(theme) {
   body.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
-  themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+  if (themeBtn) themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
 }
 
 const savedTheme = localStorage.getItem("theme") || "dark";
 setTheme(savedTheme);
 
-themeBtn.addEventListener("click", () => {
-  const current = body.getAttribute("data-theme");
-  setTheme(current === "dark" ? "light" : "dark");
-});
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    const current = body.getAttribute("data-theme");
+    setTheme(current === "dark" ? "light" : "dark");
+  });
+}
 
 /* =========================
-   MATRIX BACKGROUND
+   NAVBAR SHADOW ON SCROLL
 ========================= */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-}
-resizeCanvas();
-addEventListener("resize", resizeCanvas);
-
-const letters = "01 DATA AI BI SQL".split("");
-const fontSize = 14;
-let drops = Array(Math.floor(innerWidth / fontSize)).fill(1);
-
-function drawMatrix() {
-  ctx.fillStyle = "rgba(2,6,23,0.25)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#38bdf8";
-  ctx.font = fontSize + "px monospace";
-
-  drops.forEach((y, i) => {
-    const t = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(t, i * fontSize, y * fontSize);
-    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
+const navbar = $(".navbar");
+if (navbar) {
+  window.addEventListener("scroll", () => {
+    navbar.style.boxShadow =
+      window.scrollY > 30 ? "0 10px 30px rgba(0,0,0,.35)" : "none";
   });
-
-  requestAnimationFrame(drawMatrix);
 }
-drawMatrix();
+
+/* =========================
+   SMOOTH SCROLL
+========================= */
+$$('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    const target = $(this.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+  });
+});
 
 /* =========================
    SCROLL REVEAL
@@ -72,7 +63,7 @@ $$(".reveal").forEach(el => revealObserver.observe(el));
 /* =========================
    3D TILT EFFECT
 ========================= */
-$$(".card, .float-card").forEach(card => {
+$$(".card, .project-card, .contact-card, .img-frame").forEach(card => {
   card.addEventListener("mousemove", e => {
     const r = card.getBoundingClientRect();
     const x = e.clientX - r.left;
@@ -87,25 +78,64 @@ $$(".card, .float-card").forEach(card => {
 });
 
 /* =========================
-   DASHBOARD TABS
+   MATRIX BACKGROUND (Optional Canvas)
+========================= */
+const canvas = document.getElementById("bg");
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  resizeCanvas();
+  addEventListener("resize", resizeCanvas);
+
+  const letters = "01 DATA AI BI SQL".split("");
+  const fontSize = 14;
+  let drops = Array(Math.floor(innerWidth / fontSize)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(2,6,23,0.25)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#38bdf8";
+    ctx.font = fontSize + "px monospace";
+
+    drops.forEach((y, i) => {
+      const t = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(t, i * fontSize, y * fontSize);
+      if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    });
+
+    requestAnimationFrame(drawMatrix);
+  }
+  drawMatrix();
+}
+
+/* =========================
+   DASHBOARD TABS (Work Page)
 ========================= */
 const tabBtns = $$(".tab-btn");
 const panels = $$(".dashboard-panel");
 
-tabBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = btn.dataset.dashboard;
+if (tabBtns.length && panels.length) {
+  tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.dashboard;
 
-    tabBtns.forEach(b => b.classList.remove("active"));
-    panels.forEach(p => p.classList.remove("active"));
+      tabBtns.forEach(b => b.classList.remove("active"));
+      panels.forEach(p => p.classList.remove("active"));
 
-    btn.classList.add("active");
-    $(`#${target}-panel`).classList.add("active");
+      btn.classList.add("active");
+      const panel = document.getElementById(`${target}-panel`);
+      if (panel) panel.classList.add("active");
+    });
   });
-});
+}
 
 /* =========================
-   CASE STUDY MODAL
+   PROJECT MODAL (Work Page)
 ========================= */
 const modal = $("#projectModal");
 const modalTitle = $("#modalTitle");
@@ -156,7 +186,9 @@ const projects = {
 
 $$(".project-card").forEach(card => {
   card.addEventListener("click", () => {
+    if (!modal) return;
     const id = card.dataset.project;
+    if (!projects[id]) return;
     modalTitle.textContent = projects[id].title;
     modalDesc.innerHTML = projects[id].desc;
     modal.style.display = "flex";
@@ -164,34 +196,17 @@ $$(".project-card").forEach(card => {
 });
 
 function closeModal() {
-  modal.style.display = "none";
+  if (modal) modal.style.display = "none";
 }
 
-closeBtn.addEventListener("click", closeModal);
-modal.addEventListener("click", e => {
-  if (e.target === modal) closeModal();
-});
+if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+if (modal) {
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
+}
+
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeModal();
-});
-
-/* =========================
-   NAVBAR SHADOW ON SCROLL
-========================= */
-const navbar = $(".navbar");
-window.addEventListener("scroll", () => {
-  navbar.style.boxShadow =
-    window.scrollY > 30 ? "0 10px 30px rgba(0,0,0,.35)" : "none";
-});
-
-/* =========================
-   SMOOTH SCROLL
-========================= */
-$$('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    const target = $(this.getAttribute("href"));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: "smooth" });
-  });
 });
