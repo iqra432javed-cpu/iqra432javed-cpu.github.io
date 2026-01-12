@@ -80,15 +80,16 @@ const projects = {
   3: { title: "Inventory Intelligence Platform", desc: "Smart demand & stock optimizer." }
 };
 
-function openProject(id) {
-  modal.style.display = "flex";
-  title.textContent = projects[id].title;
-  desc.textContent = projects[id].desc;
-  modal.classList.add("fade-in");
-}
-function closeProject() {
-  modal.style.display = "none";
-}
+document.querySelectorAll(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = +card.dataset.project;
+    modal.style.display = "flex";
+    title.textContent = projects[id].title;
+    desc.textContent = projects[id].desc;
+    modal.classList.add("fade-in");
+  });
+});
+function closeProject() { modal.style.display = "none"; }
 closeBtn.addEventListener("click", closeProject);
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeProject(); });
 
@@ -129,4 +130,70 @@ const themeToggle = document.querySelector(".theme-toggle");
 themeToggle.addEventListener("click", () => {
   document.body.dataset.theme =
     document.body.dataset.theme === "light" ? "dark" : "light";
+});
+
+// DASHBOARD TAB SWITCHER + CAPTIONS
+const tabButtons = document.querySelectorAll(".tab-btn");
+const dashboards = document.querySelectorAll(".dashboard-iframe");
+const captions = document.querySelectorAll(".dashboard-caption");
+
+function typeCaption(el) {
+  const text = el.dataset.text;
+  const typedText = el.querySelector(".typed-text");
+  const cursor = el.querySelector(".cursor");
+  typedText.textContent = "";
+  let i = 0;
+
+  // Adaptive speed
+  const baseSpeed = 25;
+  const extraDelay = Math.min(text.length / 2, 40);
+  const speed = baseSpeed + extraDelay;
+
+  // Sound effect
+  const typeSound = new Audio("type-sound.mp3");
+  typeSound.volume = 0.15;
+
+  function type() {
+    if (i < text.length) {
+      typedText.textContent += text.charAt(i);
+      if (i % 3 === 0) { // play sound every 3rd char
+        typeSound.currentTime = 0;
+        typeSound.play();
+      }
+      i++;
+      setTimeout(type, speed);
+    } else {
+      cursor.style.display = "inline-block";
+    }
+  }
+  type();
+}
+
+tabButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Reset all
+    tabButtons.forEach(b => b.classList.remove("active"));
+    dashboards.forEach(d => d.classList.remove("active"));
+    captions.forEach(c => {
+      c.classList.remove("active");
+      c.querySelector(".typed-text").textContent = "";
+    });
+
+    // Activate clicked tab + matching iframe + caption
+    btn.classList.add("active");
+    const id = btn.dataset.dashboard;
+    document.getElementById(id).classList.add("active");
+    const caption = document.getElementById(id + "-caption");
+    caption.classList.add("active");
+    typeCaption(caption);
+  });
+});
+
+// SKIP BUTTONS
+document.querySelectorAll(".skip-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const caption = btn.closest(".dashboard-caption");
+    const typedText = caption.querySelector(".typed-text");
+    typedText.textContent = caption.dataset.text;
+  });
 });
