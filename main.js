@@ -1,8 +1,8 @@
 /* =========================
-   UTILITIES
+   HELPERS
 ========================= */
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
 
 /* =========================
    THEME TOGGLE
@@ -22,6 +22,68 @@ setTheme(savedTheme);
 themeBtn.addEventListener("click", () => {
   const current = body.getAttribute("data-theme");
   setTheme(current === "dark" ? "light" : "dark");
+});
+
+/* =========================
+   MATRIX BACKGROUND
+========================= */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resizeCanvas();
+addEventListener("resize", resizeCanvas);
+
+const letters = "01 DATA AI BI SQL".split("");
+const fontSize = 14;
+let drops = Array(Math.floor(innerWidth / fontSize)).fill(1);
+
+function drawMatrix() {
+  ctx.fillStyle = "rgba(2,6,23,0.25)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#38bdf8";
+  ctx.font = fontSize + "px monospace";
+
+  drops.forEach((y, i) => {
+    const t = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(t, i * fontSize, y * fontSize);
+    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  });
+
+  requestAnimationFrame(drawMatrix);
+}
+drawMatrix();
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("active");
+  });
+}, { threshold: 0.12 });
+
+$$(".reveal").forEach(el => revealObserver.observe(el));
+
+/* =========================
+   3D TILT EFFECT
+========================= */
+$$(".card, .float-card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const rx = (y / r.height - 0.5) * 8;
+    const ry = (x / r.width - 0.5) * -8;
+    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+  });
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+  });
 });
 
 /* =========================
@@ -54,40 +116,40 @@ const projects = {
   1: {
     title: "📊 Revenue Intelligence System",
     desc: `
-      <p><strong>Problem:</strong> Management had no unified view of sales performance across regions and products.</p>
-      <p><strong>Solution:</strong> Built a Power BI model combining CRM + sales data with KPI layers.</p>
+      <p><strong>Problem:</strong> No unified view of sales performance.</p>
+      <p><strong>Solution:</strong> Built Power BI model combining CRM & sales data.</p>
       <ul>
-        <li>Executive performance dashboard</li>
-        <li>Growth & funnel analysis</li>
-        <li>Automated daily refresh</li>
+        <li>Executive performance dashboards</li>
+        <li>Growth & funnel analytics</li>
+        <li>Automated refresh</li>
       </ul>
-      <p><strong>Impact:</strong> Reporting time reduced by 85%, leadership gained real-time visibility.</p>
+      <p><strong>Impact:</strong> Reporting time reduced by 85%.</p>
     `
   },
   2: {
     title: "💰 Financial Control System",
     desc: `
-      <p><strong>Problem:</strong> No control over expenses and budget vs actuals.</p>
-      <p><strong>Solution:</strong> Built a financial model with cost centers and budget tracking.</p>
+      <p><strong>Problem:</strong> No cost control or budget tracking.</p>
+      <p><strong>Solution:</strong> Built financial model with cost centers.</p>
       <ul>
-        <li>Profit & loss analytics</li>
+        <li>P&L analytics</li>
         <li>Department spend tracking</li>
         <li>Variance analysis</li>
       </ul>
-      <p><strong>Impact:</strong> Identified 18% cost leakage and improved financial discipline.</p>
+      <p><strong>Impact:</strong> Identified 18% cost leakage.</p>
     `
   },
   3: {
     title: "📦 Inventory Intelligence Platform",
     desc: `
-      <p><strong>Problem:</strong> Stockouts and overstock due to poor demand visibility.</p>
-      <p><strong>Solution:</strong> Built demand forecasting and stock health dashboards.</p>
+      <p><strong>Problem:</strong> Stockouts & overstock.</p>
+      <p><strong>Solution:</strong> Built demand & stock health dashboards.</p>
       <ul>
-        <li>Stock coverage metrics</li>
+        <li>Stock coverage KPIs</li>
         <li>Slow/fast moving analysis</li>
-        <li>Reorder planning views</li>
+        <li>Reorder planning</li>
       </ul>
-      <p><strong>Impact:</strong> Reduced stockouts by 30% and improved cash flow.</p>
+      <p><strong>Impact:</strong> Stockouts reduced by 30%.</p>
     `
   }
 };
@@ -101,105 +163,29 @@ $$(".project-card").forEach(card => {
   });
 });
 
-closeBtn.addEventListener("click", () => {
+function closeModal() {
   modal.style.display = "none";
-});
+}
 
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
+closeBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", e => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
 });
 
 /* =========================
-   SCROLL REVEAL
-========================= */
-const reveals = $$(".reveal");
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("active");
-    }
-  });
-}, { threshold: 0.1 });
-
-reveals.forEach(el => observer.observe(el));
-
-/* =========================
-   NAVBAR SCROLL EFFECT
+   NAVBAR SHADOW ON SCROLL
 ========================= */
 const navbar = $(".navbar");
-
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 40) {
-    navbar.style.boxShadow = "0 10px 30px rgba(0,0,0,.3)";
-  } else {
-    navbar.style.boxShadow = "none";
-  }
+  navbar.style.boxShadow =
+    window.scrollY > 30 ? "0 10px 30px rgba(0,0,0,.35)" : "none";
 });
 
 /* =========================
-   CANVAS BACKGROUND ANIMATION
-========================= */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-let w, h;
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
-
-const dots = Array.from({ length: 80 }, () => ({
-  x: Math.random() * w,
-  y: Math.random() * h,
-  r: Math.random() * 1.5 + 0.5,
-  vx: (Math.random() - 0.5) * 0.4,
-  vy: (Math.random() - 0.5) * 0.4
-}));
-
-function animate() {
-  ctx.clearRect(0, 0, w, h);
-
-  for (let i = 0; i < dots.length; i++) {
-    const d = dots[i];
-    d.x += d.vx;
-    d.y += d.vy;
-
-    if (d.x < 0 || d.x > w) d.vx *= -1;
-    if (d.y < 0 || d.y > h) d.vy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(56,189,248,0.6)";
-    ctx.fill();
-  }
-
-  // Lines
-  for (let i = 0; i < dots.length; i++) {
-    for (let j = i + 1; j < dots.length; j++) {
-      const a = dots[i];
-      const b = dots[j];
-      const dist = Math.hypot(a.x - b.x, a.y - b.y);
-      if (dist < 120) {
-        ctx.strokeStyle = "rgba(56,189,248,0.08)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
-      }
-    }
-  }
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-/* =========================
-   SMOOTH ANCHOR SCROLL
+   SMOOTH SCROLL
 ========================= */
 $$('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
