@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iqra Javed — Digital Intelligence Architect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Portfolio of Iqra Javed — Architecting digital intelligence systems, dashboards, and analytics engines."/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="nav-logo">Iqra<span class="accent">AI</span></div>
+    <button class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#stats">Impact</a></li>
+      <li><a href="#skills">Stack</a></li>
+      <li><a href="#projects">Systems</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>I Design Digital Intelligence</h1>
+        <p class="subtitle">
+          I transform raw data into decision-making systems, intelligent dashboards, and business control engines.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Explore Systems</a>
+          <a href="#contact" class="btn btn-secondary">Start Conversation</a>
+        </div>
+      </div>
+      <div class="float-card">
+        <div class="img-frame">
+          <img src="me.png" alt="Portrait of Iqra Javed" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section reveal">
+    <h2>Philosophy</h2>
+    <p class="center-text">
+      I don’t just analyze data — I architect intelligence. My work is focused on building
+      <strong>decision systems</strong>, <strong>business control dashboards</strong>, and
+      <strong>automated analytics engines</strong> that help organizations see, understand, and act faster.
+    </p>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" class="section reveal">
+    <h2>Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-card card"><h3 class="counter" data-target="15">0</h3><p>Systems Built</p></div>
+      <div class="stat-card card"><h3 class="counter" data-target="1200">0</h3><p>Hours of Data</p></div>
+      <div class="stat-card card"><h3 class="counter" data-target="30">0</h3><p>Dashboards</p></div>
+      <div class="stat-card card"><h3 class="counter" data-target="5">0</h3><p>Domains</p></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section reveal">
+    <h2>Technology Stack</h2>
+    <ul class="skills-grid">
+      <li class="card">Advanced Excel Engineering</li>
+      <li class="card">Power BI Intelligence Systems</li>
+      <li class="card">SQL Data Architecture</li>
+      <li class="card">DAX Performance Modeling</li>
+      <li class="card">Business Analytics Design</li>
+      <li class="card">Python Automation (In Progress)</li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section reveal">
+    <h2>Intelligence Systems</h2>
+    <div class="projects-grid">
+      <button class="project-card card" data-project="1">
+        <h3>Revenue Command Center</h3>
+        <p>Enterprise growth monitoring system</p>
+      </button>
+      <button class="project-card card" data-project="2">
+        <h3>Financial Control System</h3>
+        <p>Automated finance intelligence engine</p>
+      </button>
+      <button class="project-card card" data-project="3">
+        <h3>Inventory Intelligence Platform</h3>
+        <p>Demand & stock optimization system</p>
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section reveal">
+    <h2>Let’s Build Something Intelligent</h2>
+    <div class="contact-links">
+      <a href="mailto:iqra@email.com" class="btn btn-primary">iqra@email.com</a>
+    </div>
+  </section>
+
+  <footer>
+    Designing Digital Intelligence Systems — © 2026 Iqra Javed
+  </footer>
+
+  <!-- AI CHAT -->
+  <div id="ai-btn" aria-label="Open AI Assistant">AI</div>
+  <div id="ai-chat" role="dialog" aria-modal="true">
+    <div id="ai-body"></div>
+    <input id="ai-input" placeholder="Ask about systems, skills, journey..." aria-label="AI chat input"/>
+  </div>
+
+  <!-- MODAL -->
+  <div id="projectModal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="Close Project Modal">✕</button>
+      <h2 id="modalTitle"></h2>
+      <div id="modalImage"></div>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
