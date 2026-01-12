@@ -2,259 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
-  <title>Iqra Javed — Data Analyst, Power BI Developer & BI Consultant</title>
+  <title>Iqra Javed — Business Intelligence & Analytics</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Iqra Javed — Data Analyst, Power BI Developer & BI Consultant. I build business intelligence systems that help companies understand performance, control costs, and grow faster." />
+  <meta name="description" content="Iqra Javed — Business Intelligence & Analytics. I design analytics systems that turn data into decisions." />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Iqra Javed — Data Analyst & Power BI Developer">
-  <meta property="og:description" content="Business Intelligence, Power BI, SQL, Analytics Engineering Portfolio">
-  <meta property="og:image" content="preview.png">
-
-  <link rel="icon" href="data:,">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body data-theme="dark">
 
-  <!-- Background -->
-  <canvas id="bg" aria-hidden="true"></canvas>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-logo">Iqra<span class="accent">Javed</span></div>
 
-  <!-- HEADER -->
-  <header>
-    <nav class="navbar">
-      <div class="nav-logo">Iqra<span class="accent">AI</span></div>
-
-      <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-
+    <nav>
       <ul class="nav-links">
-        <li><a href="#case-studies">Case Studies</a></li>
-        <li><a href="#services">What I Build</a></li>
-        <li><a href="#process">How I Work</a></li>
-        <li><a href="#skills">Stack</a></li>
-        <li><a href="#dashboards">Demos</a></li>
-        <li><a href="#contact" class="nav-cta">Contact</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- MAIN -->
+  <!-- HERO -->
   <main>
-
-    <!-- HERO -->
     <section class="hero">
       <div class="container hero-content">
 
+        <!-- TEXT -->
         <div class="hero-text">
-          <h1>I Build Business Intelligence Systems That Turn Data Into Decisions</h1>
+          <h1>I Design Business Intelligence Systems That Turn Data Into Decisions</h1>
 
           <p class="subtitle">
-            Data Analyst • Power BI Developer • Analytics Consultant
+            Iqra Javed — Business Intelligence & Analytics
           </p>
 
           <p class="hero-desc">
-            I design executive dashboards, financial control systems, and analytics platforms
-            used by management to understand performance, control costs, and drive growth.
+            I’m a data analyst focused on building clean, reliable, and scalable analytics systems — not just dashboards.
+            I help teams transform scattered data into structured, decision-ready information.
           </p>
 
           <div class="hero-actions">
-            <a href="#case-studies" class="btn btn-primary">View Case Studies</a>
-            <a href="#contact" class="btn btn-secondary">Work With Me</a>
-          </div>
-
-          <div class="trust-bar">
-            📊 20+ Dashboards Built &nbsp; • &nbsp; 🏢 Finance, Sales, Inventory & Operations &nbsp; • &nbsp; ⏱️ 800+ Hours in Analytics
+            <a href="work.html" class="btn btn-primary">View My Work</a>
+            <a href="contact.html" class="btn btn-secondary">Contact Me</a>
           </div>
         </div>
 
-        <div class="float-card">
+        <!-- IMAGE -->
+        <div class="hero-image">
           <div class="img-frame">
-            <img src="me.webp" alt="Iqra Javed — Data Analyst & Power BI Developer" loading="lazy" width="380" height="380">
+            <img src="assets/img/me.png" alt="Iqra Javed" width="360" height="440">
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- WHO I HELP -->
-    <section class="section reveal">
-      <h2>Who I Help</h2>
-      <div class="services-grid">
-        <div class="card">Small & Medium Businesses</div>
-        <div class="card">Startups & Founders</div>
-        <div class="card">Finance & Operations Teams</div>
-        <div class="card">Sales Teams</div>
-        <div class="card">E-commerce & Retail</div>
-        <div class="card">Service Businesses</div>
+    <!-- WHO I WORK WITH -->
+    <section class="section">
+      <div class="container">
+        <h2>Who I Work With</h2>
+
+        <div class="services-grid">
+          <div class="card">Data-driven teams</div>
+          <div class="card">Startups & growing companies</div>
+          <div class="card">Finance, operations & sales teams</div>
+          <div class="card">Organizations that want reliable reporting</div>
+        </div>
       </div>
     </section>
 
     <!-- PROBLEMS -->
-    <section class="section reveal">
-      <h2>Problems I Solve</h2>
-      <div class="services-grid">
-        <div class="card">❌ Reports take hours every week</div>
-        <div class="card">❌ Numbers don’t match across files</div>
-        <div class="card">❌ Management can’t see performance clearly</div>
-        <div class="card">❌ Data is scattered across Excel files</div>
-        <div class="card">❌ No clear KPIs or ownership</div>
-        <div class="card">❌ Decisions are made on gut feeling</div>
-      </div>
-    </section>
+    <section class="section">
+      <div class="container">
+        <h2>The Problems I Solve</h2>
 
-    <!-- CASE STUDIES -->
-    <section id="case-studies" class="section reveal">
-      <h2>Featured Case Studies</h2>
-      <p class="section-subtitle">
-        Example business intelligence systems designed like real internal company tools.
-      </p>
-
-      <div class="projects-grid">
-
-        <button class="card project-card" data-project="1">
-          <h3>📊 Revenue Intelligence System</h3>
-          <p>Executive sales performance & growth analytics platform</p>
-          <span class="impact">📈 Reporting speed ↑ 85%</span>
-        </button>
-
-        <button class="card project-card" data-project="2">
-          <h3>💰 Financial Control System</h3>
-          <p>Budget, cost control & profitability analytics</p>
-          <span class="impact">💸 Cost leakage ↓ 18%</span>
-        </button>
-
-        <button class="card project-card" data-project="3">
-          <h3>📦 Inventory Intelligence Platform</h3>
-          <p>Stock, demand & supply chain decision system</p>
-          <span class="impact">📉 Stockouts ↓ 30%</span>
-        </button>
-
-      </div>
-
-      <p class="center-text" style="margin-top:2rem;">
-        Want a system like this for your business? <a href="#contact">Let’s talk.</a>
-      </p>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="section reveal">
-      <h2>What I Build</h2>
-
-      <div class="services-grid">
-        <div class="card">Executive Dashboards</div>
-        <div class="card">Financial Control Systems</div>
-        <div class="card">Sales Performance Systems</div>
-        <div class="card">Inventory Intelligence</div>
-        <div class="card">KPI & Reporting Systems</div>
-        <div class="card">Automated Analytics Pipelines</div>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section id="process" class="section reveal">
-      <h2>My Analytics Engineering Process</h2>
-
-      <div class="process-grid">
-        <div class="card">1️⃣ Business Understanding</div>
-        <div class="card">2️⃣ KPI & Metrics Architecture</div>
-        <div class="card">3️⃣ Data Modeling</div>
-        <div class="card">4️⃣ Dashboard UX & Storytelling</div>
-        <div class="card">5️⃣ Automation & Refresh</div>
-        <div class="card">6️⃣ Decision Enablement</div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section reveal">
-      <h2>Technology Stack</h2>
-      <ul class="skills-grid">
-        <li class="card">Power BI</li>
-        <li class="card">SQL</li>
-        <li class="card">DAX</li>
-        <li class="card">Advanced Excel</li>
-        <li class="card">Data Modeling</li>
-        <li class="card">Python (in progress)</li>
-      </ul>
-    </section>
-
-    <!-- DASHBOARDS -->
-    <section id="dashboards" class="section reveal">
-      <h2>Interactive Dashboard Demos</h2>
-
-      <p class="section-subtitle">
-        Live Power BI dashboards demonstrating analytics design, KPI systems, and storytelling.
-      </p>
-
-      <nav class="dashboard-tabs">
-        <button class="tab-btn active" data-dashboard="finance">Finance</button>
-        <button class="tab-btn" data-dashboard="inventory">Inventory</button>
-        <button class="tab-btn" data-dashboard="growth">Growth</button>
-      </nav>
-
-      <div class="dashboard-container">
-
-        <div class="dashboard-panel active" id="finance-panel">
-          <iframe loading="lazy" src="https://app.powerbi.com/view?r=REPLACE_WITH_YOUR_CODE"></iframe>
-          <p class="caption-box">💰 Financial performance and expense control dashboard</p>
+        <div class="services-grid">
+          <div class="card">No single source of truth</div>
+          <div class="card">Slow, manual, inconsistent reports</div>
+          <div class="card">Unclear or misleading KPIs</div>
+          <div class="card">Data scattered across files and tools</div>
+          <div class="card">No clear view of business performance</div>
+          <div class="card">Decisions made without reliable data</div>
         </div>
 
-        <div class="dashboard-panel" id="inventory-panel">
-          <iframe loading="lazy" src="https://app.powerbi.com/view?r=REPLACE_WITH_YOUR_CODE"></iframe>
-          <p class="caption-box">📦 Inventory movement, stock levels & demand analysis</p>
-        </div>
-
-        <div class="dashboard-panel" id="growth-panel">
-          <iframe loading="lazy" src="https://app.powerbi.com/view?r=REPLACE_WITH_YOUR_CODE"></iframe>
-          <p class="caption-box">📈 Growth, performance & business trends</p>
-        </div>
-
+        <p class="center-text" style="margin-top:30px;">
+          I design analytics systems that fix this at the root.
+        </p>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section reveal">
-      <h2>About Me</h2>
-      <p class="center-text">
-        I’m a data analyst and Power BI developer who designs business intelligence systems — not just dashboards —
-        focused on decision-making, clarity, and business impact.
-      </p>
-      <p class="center-text subtle">
-        ⚠️ Case studies on this site are simulated business scenarios based on real-world practices.
-      </p>
+    <!-- WHAT I BUILD -->
+    <section class="section">
+      <div class="container">
+        <h2>What I Build</h2>
+
+        <div class="services-grid">
+          <div class="card">Revenue & Growth Intelligence Systems</div>
+          <div class="card">Financial Control & Cost Tracking Systems</div>
+          <div class="card">Operations & Inventory Intelligence</div>
+          <div class="card">KPI & Executive Reporting Systems</div>
+          <div class="card">Automated Reporting Pipelines</div>
+          <div class="card">Clean Data Models for Analytics</div>
+        </div>
+      </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="contact-section" id="contact">
-      <h2 class="contact-title">Let’s Build Something Intelligent</h2>
+    <!-- METHOD -->
+    <section class="section">
+      <div class="container">
+        <h2>My Approach</h2>
 
-      <p class="contact-subtitle">
-        Need dashboards, analytics systems, or reporting automation? Let’s talk.
-      </p>
+        <div class="process-grid">
+          <div class="card">1. Understand the business & decisions</div>
+          <div class="card">2. Design the KPI & metrics layer</div>
+          <div class="card">3. Build a clean data model</div>
+          <div class="card">4. Design dashboards for clarity</div>
+          <div class="card">5. Automate refresh & reliability</div>
+          <div class="card">6. Enable better decisions</div>
+        </div>
+      </div>
+    </section>
 
-      <div class="contact-grid">
+    <!-- SELECTED WORK -->
+    <section class="section">
+      <div class="container">
+        <h2>Selected Work</h2>
 
-        <a href="mailto:iqra432javed@gmail.com" class="contact-card">
-          <span>📧</span>
-          <h3>Email</h3>
-          <p>iqra432javed@gmail.com</p>
-        </a>
+        <div class="projects-grid">
+          <div class="card">Revenue Intelligence System</div>
+          <div class="card">Financial Control System</div>
+          <div class="card">Inventory Intelligence System</div>
+        </div>
 
-        <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="contact-card">
-          <span>💻</span>
-          <h3>GitHub</h3>
-          <p>View Projects</p>
-        </a>
+        <p class="center-text" style="margin-top:30px;">
+          <a href="work.html">View all case studies →</a>
+        </p>
+      </div>
+    </section>
 
-        <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="contact-card">
-          <span>🔗</span>
-          <h3>LinkedIn</h3>
-          <p>Connect</p>
-        </a>
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <h2>Let’s Build Something Useful</h2>
+        <p class="center-text">
+          If you’re hiring, building a data team, or working on analytics systems, feel free to reach out.
+        </p>
 
+        <div style="text-align:center; margin-top:30px;">
+          <a href="contact.html" class="btn btn-primary">Contact Me</a>
+        </div>
       </div>
     </section>
 
@@ -262,20 +161,8 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2025 Iqra Javed — Data Analyst, Power BI Developer & BI Consultant
+    © 2026 Iqra Javed — Business Intelligence & Analytics
   </footer>
-
-  <!-- MODAL -->
-  <div id="projectModal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="close-btn" aria-label="Close modal">✕</button>
-      <h2 id="modalTitle"></h2>
-      <div id="modalDesc"></div>
-    </div>
-  </div>
-
-  <!-- JS -->
-  <script src="main.js" defer></script>
 
 </body>
 </html>
