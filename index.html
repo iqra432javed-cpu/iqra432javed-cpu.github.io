@@ -104,47 +104,41 @@
     </div>
   </section>
 
-  <!-- DASHBOARDS -->
-  <section id="multi-dashboard" class="section reveal">
-    <h2>Explore My Dashboards</h2>
+<section id="futuristic-dashboard">
+  <h2>🚀 Explore My Dashboards</h2>
 
-    <div class="dashboard-tabs">
-      <button class="tab-btn active" data-dashboard="finance">Finance</button>
-      <button class="tab-btn" data-dashboard="inventory">Inventory</button>
-      <button class="tab-btn" data-dashboard="growth">Growth</button>
+  <!-- Tab Navigation -->
+  <nav class="dashboard-tabs">
+    <button class="tab-btn active" data-dashboard="finance">Finance</button>
+    <button class="tab-btn" data-dashboard="inventory">Inventory</button>
+    <button class="tab-btn" data-dashboard="growth">Growth</button>
+  </nav>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <div class="dashboard-panel active" id="finance-panel">
+      <iframe src="https://app.powerbi.com/view?r=YOUR_FINANCE_CODE"></iframe>
+      <div class="caption-box">
+        <p>💰 Revenue and expense control after automation.</p>
+      </div>
     </div>
 
-    <div class="dashboard-frame">
-
-      <iframe id="finance" class="dashboard-iframe active"
-        src="https://app.powerbi.com/view?r=YOUR_FINANCE_CODE"></iframe>
-
-      <p id="finance-caption" class="dashboard-caption active"
-         data-text="💰 This dashboard shows revenue and expense control after automation.">
-        <span class="typed-text"></span><span class="cursor">|</span>
-        <button class="skip-btn">Skip</button>
-      </p>
-
-      <iframe id="inventory" class="dashboard-iframe"
-        src="https://app.powerbi.com/view?r=YOUR_INVENTORY_CODE"></iframe>
-
-      <p id="inventory-caption" class="dashboard-caption"
-         data-text="📦 This dashboard tracks demand vs stock levels using predictive analytics.">
-        <span class="typed-text"></span><span class="cursor">|</span>
-        <button class="skip-btn">Skip</button>
-      </p>
-
-      <iframe id="growth" class="dashboard-iframe"
-        src="https://app.powerbi.com/view?r=YOUR_GROWTH_CODE"></iframe>
-
-      <p id="growth-caption" class="dashboard-caption"
-         data-text="📈 This dashboard visualizes system adoption and growth trends.">
-        <span class="typed-text"></span><span class="cursor">|</span>
-        <button class="skip-btn">Skip</button>
-      </p>
-
+    <div class="dashboard-panel" id="inventory-panel">
+      <iframe src="https://app.powerbi.com/view?r=YOUR_INVENTORY_CODE"></iframe>
+      <div class="caption-box">
+        <p>📦 Demand vs stock levels with predictive analytics.</p>
+      </div>
     </div>
-  </section>
+
+    <div class="dashboard-panel" id="growth-panel">
+      <iframe src="https://app.powerbi.com/view?r=YOUR_GROWTH_CODE"></iframe>
+      <div class="caption-box">
+        <p>📈 System adoption and growth trends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
  <section class="contact-section" id="contact">
   <h2 class="contact-title">Let’s Build Something Intelligent</h2>
