@@ -1,222 +1,211 @@
 /* =========================
-   MATRIX BACKGROUND
+   UTILITIES
 ========================= */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-}
-resizeCanvas();
-addEventListener("resize", resizeCanvas);
-
-const letters = "01 DATA AI BI SQL".split("");
-const fontSize = 14;
-let drops = Array(Math.floor(innerWidth / fontSize)).fill(1);
-
-function drawMatrix() {
-  ctx.fillStyle = "rgba(2,6,23,0.2)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#38bdf8";
-  ctx.font = fontSize + "px monospace";
-
-  drops.forEach((y, i) => {
-    const t = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(t, i * fontSize, y * fontSize);
-    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  });
-
-  requestAnimationFrame(drawMatrix);
-}
-drawMatrix();
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("show");
-    });
-  },
-  { threshold: 0.1 }
-);
-
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-/* =========================
-   TILT EFFECT
-========================= */
-document.querySelectorAll(".card, .float-card").forEach(card => {
-  card.addEventListener("mousemove", e => {
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    const rx = (y / r.height - 0.5) * 8;
-    const ry = (x / r.width - 0.5) * -8;
-    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
-  });
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "";
-  });
-});
-
-/* =========================
-   COUNTERS
-========================= */
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = +el.dataset.target;
-    let current = 0;
-    const step = target / 60;
-
-    function animate() {
-      current += step;
-      if (current < target) {
-        el.textContent = Math.floor(current);
-        requestAnimationFrame(animate);
-      } else {
-        el.textContent = target;
-      }
-    }
-    animate();
-    counterObserver.unobserve(el);
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll(".counter").forEach(c => counterObserver.observe(c));
-
-/* =========================
-   MODAL SYSTEM
-========================= */
-const modal = document.getElementById("projectModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalDesc = document.getElementById("modalDesc");
-const closeBtn = modal.querySelector(".close-btn");
-
-const projects = {
-  1: { title: "Revenue Command Center", desc: "Enterprise growth intelligence system for performance tracking and forecasting." },
-  2: { title: "Financial Control System", desc: "Automated finance decision engine for cost, profit and risk control." },
-  3: { title: "Inventory Intelligence Platform", desc: "Smart demand & stock optimization system using predictive analytics." }
-};
-
-document.querySelectorAll(".project-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const id = card.dataset.project;
-    modalTitle.textContent = projects[id].title;
-    modalDesc.textContent = projects[id].desc;
-    modal.style.display = "flex";
-  });
-});
-
-function closeModal() {
-  modal.style.display = "none";
-}
-
-closeBtn.addEventListener("click", closeModal);
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModal();
-});
-
-/* =========================
-   AI CHAT
-========================= */
-const aiBtn = document.getElementById("ai-btn");
-const aiChat = document.getElementById("ai-chat");
-const aiInput = document.getElementById("ai-input");
-const aiBody = document.getElementById("ai-body");
-
-aiBtn.addEventListener("click", () => {
-  aiChat.style.display = aiChat.style.display === "flex" ? "none" : "flex";
-});
-
-const replies = {
-  default: "I design digital intelligence systems and analytics platforms.",
-  project: "I build business control systems, dashboards and analytics engines.",
-  skill: "My core skills are Excel, Power BI, SQL, DAX and analytics architecture."
-};
-
-aiInput.addEventListener("keydown", e => {
-  if (e.key === "Enter" && aiInput.value.trim()) {
-    const msg = aiInput.value.trim();
-    aiBody.innerHTML += `<div>> ${msg}</div>`;
-
-    let reply = replies.default;
-    if (msg.toLowerCase().includes("project")) reply = replies.project;
-    if (msg.toLowerCase().includes("skill")) reply = replies.skill;
-
-    setTimeout(() => {
-      aiBody.innerHTML += `<div style="color:#38bdf8">${reply}</div>`;
-      aiBody.scrollTop = aiBody.scrollHeight;
-    }, 400);
-
-    aiInput.value = "";
-  }
-});
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 
 /* =========================
    THEME TOGGLE
 ========================= */
-const themeToggle = document.querySelector(".theme-toggle");
-themeToggle.addEventListener("click", () => {
-  document.body.dataset.theme =
-    document.body.dataset.theme === "light" ? "dark" : "light";
+const themeBtn = $(".theme-toggle");
+const body = document.body;
+
+function setTheme(theme) {
+  body.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+  themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+}
+
+const savedTheme = localStorage.getItem("theme") || "dark";
+setTheme(savedTheme);
+
+themeBtn.addEventListener("click", () => {
+  const current = body.getAttribute("data-theme");
+  setTheme(current === "dark" ? "light" : "dark");
 });
 
 /* =========================
-   DASHBOARD TABS + TYPING
+   DASHBOARD TABS
 ========================= */
-const tabButtons = document.querySelectorAll(".tab-btn");
-const dashboards = document.querySelectorAll(".dashboard-iframe");
-const captions = document.querySelectorAll(".dashboard-caption");
+const tabBtns = $$(".tab-btn");
+const panels = $$(".dashboard-panel");
 
-function typeCaption(el) {
-  const text = el.dataset.text;
-  const typedText = el.querySelector(".typed-text");
-  const cursor = el.querySelector(".cursor");
-  typedText.textContent = "";
-  let i = 0;
-
-  function type() {
-    if (i < text.length) {
-      typedText.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, 25);
-    } else {
-      cursor.style.display = "inline-block";
-    }
-  }
-  type();
-}
-
-tabButtons.forEach(btn => {
+tabBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    tabButtons.forEach(b => b.classList.remove("active"));
-    dashboards.forEach(d => d.classList.remove("active"));
-    captions.forEach(c => {
-      c.classList.remove("active");
-      c.querySelector(".typed-text").textContent = "";
-    });
+    const target = btn.dataset.dashboard;
+
+    tabBtns.forEach(b => b.classList.remove("active"));
+    panels.forEach(p => p.classList.remove("active"));
 
     btn.classList.add("active");
-    const id = btn.dataset.dashboard;
-    document.getElementById(id).classList.add("active");
-    const caption = document.getElementById(id + "-caption");
-    caption.classList.add("active");
-    typeCaption(caption);
+    $(`#${target}-panel`).classList.add("active");
   });
 });
 
 /* =========================
-   SKIP BUTTONS
+   CASE STUDY MODAL
 ========================= */
-document.querySelectorAll(".skip-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const caption = btn.closest(".dashboard-caption");
-    caption.querySelector(".typed-text").textContent = caption.dataset.text;
+const modal = $("#projectModal");
+const modalTitle = $("#modalTitle");
+const modalDesc = $("#modalDesc");
+const closeBtn = $(".close-btn");
+
+const projects = {
+  1: {
+    title: "📊 Revenue Intelligence System",
+    desc: `
+      <p><strong>Problem:</strong> Management had no unified view of sales performance across regions and products.</p>
+      <p><strong>Solution:</strong> Built a Power BI model combining CRM + sales data with KPI layers.</p>
+      <ul>
+        <li>Executive performance dashboard</li>
+        <li>Growth & funnel analysis</li>
+        <li>Automated daily refresh</li>
+      </ul>
+      <p><strong>Impact:</strong> Reporting time reduced by 85%, leadership gained real-time visibility.</p>
+    `
+  },
+  2: {
+    title: "💰 Financial Control System",
+    desc: `
+      <p><strong>Problem:</strong> No control over expenses and budget vs actuals.</p>
+      <p><strong>Solution:</strong> Built a financial model with cost centers and budget tracking.</p>
+      <ul>
+        <li>Profit & loss analytics</li>
+        <li>Department spend tracking</li>
+        <li>Variance analysis</li>
+      </ul>
+      <p><strong>Impact:</strong> Identified 18% cost leakage and improved financial discipline.</p>
+    `
+  },
+  3: {
+    title: "📦 Inventory Intelligence Platform",
+    desc: `
+      <p><strong>Problem:</strong> Stockouts and overstock due to poor demand visibility.</p>
+      <p><strong>Solution:</strong> Built demand forecasting and stock health dashboards.</p>
+      <ul>
+        <li>Stock coverage metrics</li>
+        <li>Slow/fast moving analysis</li>
+        <li>Reorder planning views</li>
+      </ul>
+      <p><strong>Impact:</strong> Reduced stockouts by 30% and improved cash flow.</p>
+    `
+  }
+};
+
+$$(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.dataset.project;
+    modalTitle.textContent = projects[id].title;
+    modalDesc.innerHTML = projects[id].desc;
+    modal.style.display = "flex";
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+const reveals = $$(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => observer.observe(el));
+
+/* =========================
+   NAVBAR SCROLL EFFECT
+========================= */
+const navbar = $(".navbar");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 40) {
+    navbar.style.boxShadow = "0 10px 30px rgba(0,0,0,.3)";
+  } else {
+    navbar.style.boxShadow = "none";
+  }
+});
+
+/* =========================
+   CANVAS BACKGROUND ANIMATION
+========================= */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const dots = Array.from({ length: 80 }, () => ({
+  x: Math.random() * w,
+  y: Math.random() * h,
+  r: Math.random() * 1.5 + 0.5,
+  vx: (Math.random() - 0.5) * 0.4,
+  vy: (Math.random() - 0.5) * 0.4
+}));
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+
+  for (let i = 0; i < dots.length; i++) {
+    const d = dots[i];
+    d.x += d.vx;
+    d.y += d.vy;
+
+    if (d.x < 0 || d.x > w) d.vx *= -1;
+    if (d.y < 0 || d.y > h) d.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(56,189,248,0.6)";
+    ctx.fill();
+  }
+
+  // Lines
+  for (let i = 0; i < dots.length; i++) {
+    for (let j = i + 1; j < dots.length; j++) {
+      const a = dots[i];
+      const b = dots[j];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      if (dist < 120) {
+        ctx.strokeStyle = "rgba(56,189,248,0.08)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+/* =========================
+   SMOOTH ANCHOR SCROLL
+========================= */
+$$('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    const target = $(this.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
   });
 });
