@@ -1,70 +1,124 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial}
-body{background:#020617;color:#e5e7eb}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Iqra Javed — Power BI Consultant & Business Intelligence Expert</title>
 
-a{text-decoration:none;color:inherit}
+<meta name="description" content="Iqra Javed is a Power BI Consultant helping companies automate reporting, increase profit, and make better decisions using data.">
+<meta name="keywords" content="Power BI Consultant, Data Analyst, Business Intelligence, Dashboard, SQL, Analytics, Pakistan, Remote">
+<meta name="author" content="Iqra Javed">
 
-.navbar{
-position:fixed;top:0;width:100%;display:flex;justify-content:space-between;
-padding:20px 60px;background:rgba(2,6,23,.8);backdrop-filter:blur(10px);z-index:100;
-}
+<meta property="og:title" content="Iqra Javed — Power BI Consultant">
+<meta property="og:description" content="Turn your business data into clear, profitable decisions.">
+<meta property="og:type" content="website">
 
-.logo{font-size:24px;font-weight:800}
-.logo span{color:#38bdf8}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-nav a{margin-left:25px;font-weight:600}
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script defer src="main.js"></script>
+</head>
+<body>
 
-.btn{
-padding:12px 20px;border-radius:10px;border:1px solid #38bdf8
-}
+<canvas id="bg"></canvas>
 
-.primary{background:#38bdf8;color:#020617}
-.secondary{background:transparent}
+<!-- WhatsApp -->
+<a href="https://wa.me/923000000000" class="whatsapp" target="_blank">💬</a>
 
-.hero{
-min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;
-padding:120px 60px;gap:40px;
-}
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">Iqra<span>Javed</span></div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#projects">Case Studies</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-.hero-img img{
-width:320px;border-radius:50%;border:4px solid #38bdf8;box-shadow:0 0 40px #38bdf8;
-}
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Iqra Javed — Power BI Consultant & Business Intelligence Expert</h1>
+    <p class="subtitle">I help companies turn data into clear decisions, higher profit, and faster growth.</p>
+    <p class="desc">
+      I design complete business intelligence systems — not just dashboards.
+      My work helps founders and management teams understand performance, control costs,
+      and scale with confidence using clean, automated data.
+    </p>
+    <a href="#contact" class="btn primary">Get Free Consultation</a>
+  </div>
+  <img src="me.png" class="hero-img" alt="Iqra Javed">
+</section>
 
-.section{padding:100px 60px;text-align:center}
-.section.dark{background:#020617}
+<!-- SERVICES -->
+<section class="section" id="services">
+<h2>Services</h2>
+<p class="section-sub">Business-focused analytics systems designed for decision-makers.</p>
 
-h1{font-size:48px}
-h2{font-size:36px;margin-bottom:40px}
+<div class="grid">
+  <div class="card">📊 Executive Power BI Dashboards for Management</div>
+  <div class="card">💰 Financial & Profitability Analytics Systems</div>
+  <div class="card">📈 Sales, Growth & Performance Intelligence</div>
+  <div class="card">⚙️ Reporting Automation & Data Pipelines</div>
+  <div class="card">📦 Inventory, Operations & Supply Chain Analytics</div>
+  <div class="card">🧠 Complete Business Intelligence Architecture</div>
+</div>
+</section>
 
-.grid{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px
-}
+<!-- PROJECTS -->
+<section class="section dark" id="projects">
+<h2>Selected Case Studies</h2>
+<p class="section-sub">Examples of real-world business intelligence systems designed for decision-makers.</p>
 
-.card,.price-card{
-background:#020617;border:1px solid rgba(56,189,248,.3);
-padding:30px;border-radius:16px;transition:.3s
-}
+<div class="grid">
+  <div class="project-card">
+    <img src="p1.jpg">
+    <h3>Revenue Intelligence System</h3>
+    <p>Reduced reporting time by 85% by building a unified executive revenue system.</p>
+  </div>
+  <div class="project-card">
+    <img src="p2.jpg">
+    <h3>Financial Control System</h3>
+    <p>Identified 18% cost leakage using automated P&L and cost center analytics.</p>
+  </div>
+  <div class="project-card">
+    <img src="p3.jpg">
+    <h3>Inventory Intelligence Platform</h3>
+    <p>Reduced stockouts by 30% using demand planning and stock health dashboards.</p>
+  </div>
+</div>
 
-.card:hover,.price-card:hover{
-transform:translateY(-8px);box-shadow:0 0 30px rgba(56,189,248,.3)
-}
+<h3 style="margin-top:60px;text-align:center">Live Power BI Dashboard Preview</h3>
+<iframe class="powerbi" src="YOUR_POWERBI_EMED_LINK_HERE"></iframe>
+</section>
 
-.price-card.highlight{
-border:2px solid #38bdf8;box-shadow:0 0 40px rgba(56,189,248,.4)
-}
+<!-- TESTIMONIALS -->
+<section class="section">
+<h2>What Clients Say</h2>
 
-.center{max-width:700px;margin:auto;font-size:18px}
+<div class="grid">
+  <div class="card">⭐ "Iqra completely transformed how we see our business numbers. Decisions are now fast and confident."</div>
+  <div class="card">⭐ "One of the best Power BI and analytics consultants we have worked with."</div>
+  <div class="card">⭐ "Professional, strategic, and business-focused — not just a dashboard developer."</div>
+</div>
+</section>
 
-.contact-form{
-max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px
-}
+<!-- CONTACT -->
+<section class="section dark" id="contact">
+<h2>Let’s Build Your Business Intelligence System</h2>
+<p class="section-sub">Describe your business and I’ll tell you exactly how we can improve your reporting and decisions.</p>
 
-input,textarea{
-padding:14px;border-radius:10px;border:none;outline:none
-}
+<form id="contactForm" class="contact-form">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Tell me about your business problem" required></textarea>
+  <button class="btn primary">Send My Request</button>
+</form>
 
-footer{text-align:center;padding:30px;opacity:.6}
+<p id="formStatus"></p>
+</section>
 
-.whatsapp{
-position:fixed;bottom:25px;right:25px;background:#25D366;color:#fff;
-font-size:28px;padding:14px;border-radius:50%;box-shadow:0 0 20px #25D366
-}
+<footer>© 2026 Iqra Javed — Power BI Consultant & Business Intelligence Expert</footer>
+
+</body>
+</html>
